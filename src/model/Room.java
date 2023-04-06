@@ -1,16 +1,15 @@
 package model;
 
 public class Room implements IRoom {
-    //implement Iroom interface and its methods  ***
-    String roomNumber;
-    Double price;
-    RoomType enumeration;
-    boolean isFree;
-    public Room(String roomNumber, Double price, RoomType enumeration, boolean isFree){
+    private String roomNumber;
+    private Double price;
+    private RoomType roomType;
+    private boolean isFree;
+    public Room(String roomNumber, Double price, RoomType roomType) {
         this.roomNumber = roomNumber;
         this.price = price;
-        this.enumeration = enumeration;
-        this.isFree = isFree;
+        this.roomType = roomType;
+        this.isFree = true;
     }
 
     @Override
@@ -25,16 +24,21 @@ public class Room implements IRoom {
 
     @Override
     public RoomType getRoomType() {
-        return enumeration;
+        return roomType;
     }
 
     @Override
     public boolean isFree() {
-        return false;
+        return isFree;
+    }
+
+    // Setter method for the 'isFree' field
+    public void setFree(boolean isFree) {
+        this.isFree = isFree;
     }
 
     @Override
     public String toString() {
-        return "Room number: " + roomNumber + ", Room type: " + enumeration + ", Room price: " + price + ", Is room free: " + isFree;
+        return "Room Number: " + roomNumber + ", Room Type: " + roomType + ", Price: $" + price + ", Free: " + isFree;
     }
 }

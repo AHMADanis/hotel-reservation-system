@@ -1,27 +1,37 @@
 package model;
 
 public class Customer {
-    String firstName;
-    String lastName;
-    String email;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+
     public Customer(String firstName, String lastName, String email) {
+        // Validate email using regex
+        if (!email.matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+            throw new IllegalArgumentException("Invalid email address: " + email);
+        }
+
         this.firstName = firstName;
         this.lastName = lastName;
-
-        // validate email format using regex
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        if (email.matches(emailRegex)) {
-            this.email = email;
-        } else {
-            throw new IllegalArgumentException("Invalid email format: " + email);
-        }
+        this.email = email;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    // Override toString() method to provide a better description of the Customer object
     @Override
-    public String toString(){
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String toString() {
+        return "Name: " + firstName + " " + lastName + ", Email: " + email;
     }
 }
+
