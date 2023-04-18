@@ -28,35 +28,33 @@ public class Room implements IRoom{
     public boolean isFree() {
         return this.price != null && this.price.equals(0.0);
     }
-
+    private static boolean isFirstRecord = true;
     @Override
     public String toString() {
-        String format = "| %-12s | %-15s | %-10s |%n";
-        String divider = "+--------------+-----------------+------------+%n";
+        String format = "| %-12s | %-15s | %-10s |";
+        String divider = "+--------------+-----------------+------------+";
         StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format(divider));
-        sb.append(String.format(format, "Room Number", "Room Type", "Price"));
-        sb.append(String.format(divider));
-        sb.append(String.format(format, roomNumber, roomType, "€" + price));
-        sb.append(String.format(divider));
-
+        if(isFirstRecord) {
+            sb.append(divider);
+            sb.append(String.format("\n" + format, "Room Number", "Room Type", "Price"));
+            sb.append("\n" + divider);
+            isFirstRecord = false;
+        }
+        sb.append(String.format("\n" + format, roomNumber, roomType, "€" + price));
         return sb.toString();
     }
 
-    // need to update and under this code
+    // updated override
     @Override
     public boolean equals(Object obj) {
-        if(obj == this) {
+        if (obj == this) {
             return true;
         }
-
-        if(!(obj instanceof Room)) {
+        if (!(obj instanceof Room)) {
             return false;
         }
-
-        final Room room = (Room) obj;
-        return Objects.equals(this.roomNumber, room.roomNumber);
+        Room otherRoom = (Room) obj;
+        return this.roomNumber.equals(otherRoom.roomNumber);
     }
 
     @Override

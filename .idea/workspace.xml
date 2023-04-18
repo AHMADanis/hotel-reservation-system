@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f1238cd-be75-443d-b343-448164d5dd07" name="Changes" comment="added other classes into the project">
+    <list default="true" id="2f1238cd-be75-443d-b343-448164d5dd07" name="Changes" comment="added new functionality in classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/AdminResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/AdminResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/HotelResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/FreeRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/FreeRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/IRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/IRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Reservation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681481634017</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added new functionality in classes">
+      <created>1681803618425</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681803618425</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +128,7 @@
     <MESSAGE value="Initial commit: Java project for hotel management system" />
     <MESSAGE value="created Customer, FreeRoom and Reservation classes" />
     <MESSAGE value="added other classes into the project" />
-    <option name="LAST_COMMIT_MESSAGE" value="added other classes into the project" />
+    <MESSAGE value="added new functionality in classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new functionality in classes" />
   </component>
 </project>

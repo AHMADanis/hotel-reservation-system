@@ -6,13 +6,9 @@ import model.RoomType;
 
 import java.util.*;
 
-/**
- * @author joseneto
- *
- */
 public class AdminMenu {
     private static final AdminResource adminResource = AdminResource.getInstance();
-    private static void addPredefinedRooms() {
+    private static void predefinedRooms() {
         List<IRoom> rooms = new ArrayList<>();
         rooms.add(new Room("101", 100.0, RoomType.SINGLE));
         rooms.add(new Room("102", 120.0, RoomType.DOUBLE));
@@ -22,7 +18,7 @@ public class AdminMenu {
     public static void adminMenu() {
         String line = "";
         final Scanner scanner = new Scanner(System.in);
-        addPredefinedRooms();
+        predefinedRooms();
         printMenu();
 
         try {

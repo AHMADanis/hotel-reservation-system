@@ -15,7 +15,6 @@ public class AdminResource {
         customerService = CustomerService.getInstance();
         reservationService = ReservationService.getInstance();
     }
-
     public static AdminResource getInstance() {
         return INSTANCE;
     }
@@ -23,60 +22,22 @@ public class AdminResource {
     public Customer getCustomer(String email) {
         return customerService.getCustomer(email);
     }
-
     public void addRoom(List<IRoom> rooms) {
-        rooms.forEach(reservationService::addRoom);
+        for(IRoom room: rooms) {
+            if(reservationService.getARoom(room.getRoomNumber())!= null){
+                System.out.println("A room with the same room number already exists in the system.");
+            }else {
+                reservationService.addRoom(room);
+            }
+        }
     }
-
     public Collection<IRoom> getAllRooms() {
         return reservationService.getAllRooms();
     }
-
     public Collection<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
-
     public void displayAllReservations() {
         reservationService.printAllReservation();
     }
 }
-/*
-public class AdminResource {
-
-    // Static reference
-    private static final CustomerService customerService = CustomerService.getInstance();
-    private static final RoomService roomService = RoomService.getInstance();
-    private static final ReservationService reservationService = ReservationService.getInstance();
-
-    // Get customer by email
-    public Customer getCustomer(String email) {
-        return customerService.getCustomer(email);
-    }
-
-    // Add list of rooms
-    public void addRoom(List<IRoom> rooms) {
-        for (IRoom room : rooms) {
-            roomService.addRoom(room);
-        }
-    }
-
-    // Get all rooms
-    public Collection<IRoom> getAllRooms() {
-        return roomService.getAllRooms();
-    }
-
-    // Get all customers
-    public Collection<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
-    }
-
-    // Display all reservations
-    public void displayAllReservations() {
-        Collection<Reservation> reservations = reservationService.getAllReservations();
-        for (Reservation reservation : reservations) {
-            System.out.println(reservation);
-        }
-    }
-}
-
- */
