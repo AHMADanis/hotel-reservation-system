@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class MainMenu {
-    private static final String DEFAULT_DATE_FORMAT = "MM/dd/yyyy";
+    private static final String DATE_FORMAT = "MM/dd/yyyy";
     private static final HotelResource hotelResource = HotelResource.getInstance();
     public static void adminMenuOptions() {
         String[] options = {"Find and reserve a room", "See my reservations", "Create an Account", "Admin", "Exit"};
@@ -49,7 +49,7 @@ public class MainMenu {
                     default -> System.out.println("Unknown action\n");
                 }
             } else {
-                System.out.println("Invalid input. Please select a number from 1 to 5\n");
+                System.out.println("Invalid input. Please select 1 to 5\n");
             }
         }
     }
@@ -95,7 +95,7 @@ public class MainMenu {
 
     private static Date getInputDate(final Scanner scanner) {
         try {
-            return new SimpleDateFormat(DEFAULT_DATE_FORMAT).parse(scanner.nextLine());
+            return new SimpleDateFormat(DATE_FORMAT).parse(scanner.nextLine());
         } catch (ParseException ex) {
             System.out.println("Error: Invalid date.");
             findAndReserveRoom();
