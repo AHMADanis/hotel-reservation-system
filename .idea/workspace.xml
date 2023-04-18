@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f1238cd-be75-443d-b343-448164d5dd07" name="Changes" comment="added new functionality in classes">
+    <list default="true" id="2f1238cd-be75-443d-b343-448164d5dd07" name="Changes" comment="updated switches">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681810426465</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="updated switches">
+      <created>1681813841183</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681813841184</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +140,7 @@
     <MESSAGE value="created Customer, FreeRoom and Reservation classes" />
     <MESSAGE value="added other classes into the project" />
     <MESSAGE value="added new functionality in classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new functionality in classes" />
+    <MESSAGE value="updated switches" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated switches" />
   </component>
 </project>
