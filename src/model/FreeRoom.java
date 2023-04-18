@@ -8,6 +8,6 @@ public class FreeRoom extends Room {
     @Override
     public String toString(){
         //return "FreeRoom " + getRoomNumber() + ", " + getRoomType() + ", " + "Price: " + getRoomPrice();
-        return "Free " + super.toString();
+        return "Free Room: " + super.toString();
     }
 }

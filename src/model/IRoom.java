@@ -6,3 +6,4 @@ public interface IRoom {
     RoomType getRoomType();
     boolean isFree();
 }
+

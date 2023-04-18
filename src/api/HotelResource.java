@@ -7,44 +7,56 @@ import service.CustomerService;
 import service.ReservationService;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-
 public class HotelResource {
-    private static final CustomerService customerService = new CustomerService();
-    private static final ReservationService reservationService = new ReservationService();
-    //private static final RoomService roomService = new RoomService();
-
-    public static Customer getCustomer(String email) {
-        return customerService.getCustomer(email);
+    private static final HotelResource INSTANCE = new HotelResource();
+    //private final CustomerService customerService = CustomerService.getInstance();
+    private final ReservationService reservationService = ReservationService.getInstance();
+    private HotelResource() {}
+    public static HotelResource getInstance() {
+        return INSTANCE;
     }
 
-    public static void createACustomer(String email, String firstName, String lastName) {
-        customerService.addCustomer(email, firstName, lastName);
+    public Customer getCustomer(String email) {
+        return CustomerService.getCustomer(email);
     }
 
-    public static IRoom getRoom(String roomNumber) {
-        return roomService.getARoom(roomNumber);
+    public void createCustomer(String email, String firstName, String lastName) {
+        CustomerService.addCustomer(email, firstName, lastName);
     }
 
-    public static Reservation bookARoom(String customerEmail, IRoom room, Date checkInDate, Date checkOutDate) {
-        Customer customer = customerService.getCustomer(customerEmail);
-        if (customer == null) {
-            throw new IllegalArgumentException("Customer with email " + customerEmail + " does not exist.");
+    public IRoom getRoom(String roomNumber) {
+        return reservationService.getARoom(roomNumber);
+    }
+
+    public Reservation bookRoom(String customerEmail, IRoom room, Date checkInDate, Date checkOutDate) {
+        Customer customer = getCustomer(customerEmail);
+        if(customer == null){
+            throw new IllegalArgumentException("Invalid customer email");
         }
-
         return reservationService.reserveARoom(customer, room, checkInDate, checkOutDate);
     }
 
-    public static Collection<Reservation> getCustomersReservations(String customerEmail) {
-        Customer customer = customerService.getCustomer(customerEmail);
+    public Collection<Reservation> getCustomersReservations(String customerEmail) {
+        final Customer customer = getCustomer(customerEmail);
+
         if (customer == null) {
-            throw new IllegalArgumentException("Customer with email " + customerEmail + " does not exist.");
+            return Collections.emptyList();
         }
 
-        return reservationService.getCustomerReservations(customer);
+        return reservationService.getCustomerReservations(getCustomer(customerEmail));
     }
 
-    public static Collection<IRoom> findARoom(Date checkIn, Date checkOut) {
+    public Collection<IRoom> findAvailableRooms(final Date checkIn, final Date checkOut) {
         return reservationService.findRooms(checkIn, checkOut);
+    }
+
+    public Collection<IRoom> findAlternativeRooms(final Date checkIn, final Date checkOut) {
+        return reservationService.findAlternativeRooms(checkIn, checkOut);
+    }
+
+    public Date addDaysToDate(final Date date) {
+        return reservationService.addDaysToDate(date);
     }
 }

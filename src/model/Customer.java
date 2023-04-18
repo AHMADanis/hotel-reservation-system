@@ -1,5 +1,6 @@
 package model;
 
+import java.util.regex.Pattern;
 public class Customer {
     private final String firstName;
     private final String lastName;
@@ -27,11 +28,20 @@ public class Customer {
     public String getEmail() {
         return email;
     }
-
-    // Override toString() method to provide a better description of the Customer object
+    private static boolean isFirstRecord = true;
     @Override
     public String toString() {
-        return "Name: " + firstName + " " + lastName + ", Email: " + email;
+        String format = "| %-20s | %-30s |%n";
+        StringBuilder sb = new StringBuilder();
+        if (isFirstRecord) {
+            sb.append("+----------------------+--------------------------------+\n");
+            sb.append(String.format(format, "Name", "Email"));
+            sb.append("+----------------------+--------------------------------+\n");
+            isFirstRecord = false;
+        }
+        sb.append(String.format(format, firstName + " " + lastName, email));
+        return sb.toString();
     }
+
 }
 
