@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class MainMenu {
     private static final String DATE_FORMAT = "MM/dd/yyyy";
     private static final HotelResource hotelResource = HotelResource.getInstance();
-    public static void adminMenuOptions() {
+    public static void mainMenuOptions() {
         String[] options = {"Find and reserve a room", "See my reservations", "Create an Account", "Admin", "Exit"};
         StringBuilder menu = new StringBuilder();
         menu.append("\033[1mUDACITY HOTEL RESERVATION SYSTEM\033[0m\n");
@@ -33,7 +33,7 @@ public class MainMenu {
         boolean exit = false;
 
         while (!exit) {
-            adminMenuOptions();
+            mainMenuOptions();
             String input = scanner.nextLine().trim();
 
             if (Arrays.asList(options).contains(input)) {
@@ -41,7 +41,7 @@ public class MainMenu {
                     case "1" -> findAndReserveRoom();
                     case "2" -> seeMyReservation();
                     case "3" -> createAccount();
-                    case "4" -> AdminMenu.adminMenu();
+                    case "4" -> AdminMenu.adminMenuOptions();
                     case "5" -> {
                         System.out.println("Exit");
                         exit = true;
@@ -113,7 +113,7 @@ public class MainMenu {
                 Customer customer = hotelResource.getCustomer(customerEmail);
                 if (customer == null) {
                     System.out.println("Customer not found. Please create a new account.");
-                    adminMenuOptions();
+                    mainMenuOptions();
                 } else {
                     prompt = "What room number would you like to reserve?";
                     String roomNumber = getStringInput(prompt, scanner);
@@ -123,15 +123,15 @@ public class MainMenu {
                         System.out.println("Reservation created successfully! \n" + reservation);
                     } else {
                         System.out.println("Error: room number not available. Please start reservation again.");
-                        adminMenuOptions();
+                        mainMenuOptions();
                     }
                 }
             } else {
                 System.out.println("Please create an account.");
-                adminMenuOptions();
+                mainMenuOptions();
             }
         } else {
-            adminMenuOptions();
+            mainMenuOptions();
         }
     }
 
@@ -168,7 +168,6 @@ public class MainMenu {
 
         displayReservations(hotelResource.getCustomersReservations(customerEmail));
     }
-
     private static void displayReservations(Collection<Reservation> reservations) {
         try {
             String output = reservations.stream()
@@ -176,9 +175,9 @@ public class MainMenu {
                     .collect(Collectors.joining());
 
             System.out.println(reservations.isEmpty() ?
-                    "No reservations found for the given email." : output);
+                    "Empty email: or we could not find your email in our system" : output);
         } catch (Exception e) {
-            System.out.println("Error occurred while trying to display reservations: " + e.getMessage());
+            System.out.println("There are no reservation against your email");
         }
     }
 
@@ -193,7 +192,7 @@ public class MainMenu {
         try {
             hotelResource.createCustomer(inputs[0], inputs[1], inputs[2]);
             System.out.println("Account created successfully!");
-            adminMenuOptions();
+            mainMenuOptions();
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getLocalizedMessage());
             createAccount();

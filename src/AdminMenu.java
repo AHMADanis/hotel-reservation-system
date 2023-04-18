@@ -15,56 +15,67 @@ public class AdminMenu {
         rooms.add(new Room("103", 150.0, RoomType.DOUBLE));
         adminResource.addRoom(rooms);
     }
-    public static void adminMenu() {
-        String line = "";
-        final Scanner scanner = new Scanner(System.in);
+    private static void adminScreenOptions() {
+        String[] menuOptions = {
+                "See all Customers",
+                "See all Rooms",
+                "See all Reservations",
+                "Add a Room",
+                "Back to Main Menu"};
+        String divider = "--------------------------------------------";
+        System.out.println("\033[1mADMIN MENU\033[0m");
+        System.out.println(divider);
+        for (int i = 0; i < menuOptions.length; i++) {
+            System.out.println((i+1) + ". " + menuOptions[i]);
+        }
+        System.out.println(divider);
+        System.out.println("Please enter your desired menu option:");
+    }
+    public static void adminMenuOptions() {
+        Scanner scanner = new Scanner(System.in);
         predefinedRooms();
-        printMenu();
+        adminScreenOptions();
+        while (true) {
+            String line = scanner.nextLine().trim();
 
-        try {
-            do {
-                line = scanner.nextLine();
-
-                if (line.length() == 1) {
-                    switch (line.charAt(0)) {
-                        case '1':
-                            displayAllCustomers();
-                            break;
-                        case '2':
-                            displayAllRooms();
-                            break;
-                        case '3':
-                            displayAllReservations();
-                            break;
-                        case '4':
-                            addRoom();
-                            break;
-                        case '5':
-                            MainMenu.adminMenuOptions();
-                            break;
-                        default:
-                            System.out.println("Unknown action\n");
-                            break;
-                    }
-                } else {
-                    System.out.println("Error: Invalid action\n");
-                }
-            } while (line.charAt(0) != '5' || line.length() != 1);
-        } catch (StringIndexOutOfBoundsException ex) {
-            System.out.println("Empty input received. Exiting program...");
+            if (line.isEmpty()) {
+                System.out.println("No input received. Please try again.");
+                continue;
+            }
+            char option = line.charAt(0);
+            switch (option) {
+                case '1' -> seeAllCustomers();
+                case '2' -> seeAllRooms();
+                case '3' -> seeAllReservations();
+                case '4' -> addRoom();
+                case '5' -> MainMenu.mainMenuOptions();
+                default -> System.out.println("Invalid option selected. Please try again.");
+            }
+            if (option == '5') {
+                break;
+            }
+        }
+    }
+    private static void seeAllCustomers() {
+        Collection<Customer> customers = adminResource.getAllCustomers();
+        if (customers.isEmpty()) {
+            System.out.println("No customers were found.");
+        } else {
+            customers.forEach(System.out::println);
         }
     }
 
-    private static void printMenu() {
-        System.out.print("\nAdmin Menu\n" +
-                "--------------------------------------------\n" +
-                "1. See all Customers\n" +
-                "2. See all Rooms\n" +
-                "3. See all Reservations\n" +
-                "4. Add a Room\n" +
-                "5. Back to Main Menu\n" +
-                "--------------------------------------------\n" +
-                "Please select a number for the menu option:\n");
+    private static void seeAllRooms() {
+        Collection<IRoom> rooms = adminResource.getAllRooms();
+        if (rooms.isEmpty()) {
+            System.out.println("No rooms were found.");
+        } else {
+            rooms.forEach(System.out::println);
+        }
+    }
+
+    private static void seeAllReservations() {
+        adminResource.displayAllReservations();
     }
 
     private static void addRoom() {
@@ -83,8 +94,6 @@ public class AdminMenu {
 
         adminResource.addRoom(Collections.singletonList(room));
         System.out.println("Room added successfully!");
-
-        System.out.println("Would like to add another room? Y/N");
         addAnotherRoom();
     }
 
@@ -92,8 +101,7 @@ public class AdminMenu {
         try {
             return Double.parseDouble(scanner.nextLine());
         } catch (NumberFormatException exp) {
-            System.out.println("Invalid room price! Please, enter a valid double number. " +
-                    "Decimals should be separated by point (.)");
+            System.out.println("Invalid room price! Please, enter a valid double number");
             return enterRoomPrice(scanner);
         }
     }
@@ -109,51 +117,19 @@ public class AdminMenu {
 
     private static void addAnotherRoom() {
         final Scanner scanner = new Scanner(System.in);
+        String anotherRoom;
 
-        try {
-            String anotherRoom;
-
-            anotherRoom = scanner.nextLine();
-
-            while ((anotherRoom.charAt(0) != 'Y' && anotherRoom.charAt(0) != 'N')
-                    || anotherRoom.length() != 1) {
-                System.out.println("Please enter Y (Yes) or N (No)");
-                anotherRoom = scanner.nextLine();
-            }
-
-            if (anotherRoom.charAt(0) == 'Y') {
-                addRoom();
-            } else if (anotherRoom.charAt(0) == 'N') {
-                printMenu();
-            } else {
+        do {
+            System.out.println("Add another room? (Y/N)");
+            anotherRoom = scanner.nextLine().toUpperCase();
+        } while (!anotherRoom.equals("Y") && !anotherRoom.equals("N"));
+        switch (anotherRoom) {
+            case "Y" -> addRoom();
+            case "N" -> adminScreenOptions();
+            default -> {
+                System.out.println("Invalid input. Please enter Y or N.");
                 addAnotherRoom();
             }
-        } catch (StringIndexOutOfBoundsException ex) {
-            addAnotherRoom();
         }
-    }
-
-    private static void displayAllRooms() {
-        Collection<IRoom> rooms = adminResource.getAllRooms();
-
-        if(rooms.isEmpty()) {
-            System.out.println("No rooms found.");
-        } else {
-            adminResource.getAllRooms().forEach(System.out::println);
-        }
-    }
-
-    private static void displayAllCustomers() {
-        Collection<Customer> customers = adminResource.getAllCustomers();
-
-        if (customers.isEmpty()) {
-            System.out.println("No customers found.");
-        } else {
-            adminResource.getAllCustomers().forEach(System.out::println);
-        }
-    }
-
-    private static void displayAllReservations() {
-        adminResource.displayAllReservations();
     }
 }

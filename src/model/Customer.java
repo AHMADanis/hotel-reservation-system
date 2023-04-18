@@ -1,6 +1,4 @@
 package model;
-
-import java.util.regex.Pattern;
 public class Customer {
     private final String firstName;
     private final String lastName;
