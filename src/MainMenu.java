@@ -5,59 +5,52 @@ import model.IRoom;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Scanner;
 
-/**
- * @author joseneto
- *
- */
 public class MainMenu {
-
     private static final String DEFAULT_DATE_FORMAT = "MM/dd/yyyy";
     private static final HotelResource hotelResource = HotelResource.getInstance();
-
+    public static void adminMenuOptions() {
+        String[] options = {"Find and reserve a room", "See my reservations", "Create an Account", "Admin", "Exit"};
+        StringBuilder menu = new StringBuilder();
+        menu.append("\nThank you for using our hotel reservation application\n");
+        menu.append("--------------------------------------------\n");
+        for (int i = 0; i < options.length; i++) {
+            menu.append(String.format("%d. %s\n", i+1, options[i]));
+        }
+        menu.append("--------------------------------------------\n");
+        menu.append("Please enter the number corresponding to your desired menu option:\n");
+        System.out.print(menu);
+    }
     public static void mainMenu() {
-        String line = "";
         Scanner scanner = new Scanner(System.in);
+        String[] options = {"1", "2", "3", "4", "5"};
+        boolean exit = false;
 
-        printMainMenu();
+        while (!exit) {
+            adminMenuOptions();
+            String input = scanner.nextLine().trim();
 
-        try {
-            do {
-                line = scanner.nextLine();
-
-                if (line.length() == 1) {
-                    switch (line.charAt(0)) {
-                        case '1':
-                            findAndReserveRoom();
-                            break;
-                        case '2':
-                            seeMyReservation();
-                            break;
-                        case '3':
-                            createAccount();
-                            break;
-                        case '4':
-                            AdminMenu.adminMenu();
-                            break;
-                        case '5':
-                            System.out.println("Exit");
-                            break;
-                        default:
-                            System.out.println("Unknown action\n");
-                            break;
+            if (Arrays.asList(options).contains(input)) {
+                switch (input) {
+                    case "1" -> findAndReserveRoom();
+                    case "2" -> seeMyReservation();
+                    case "3" -> createAccount();
+                    case "4" -> AdminMenu.adminMenu();
+                    case "5" -> {
+                        System.out.println("Exit");
+                        exit = true;
                     }
-                } else {
-                    System.out.println("Error: Invalid action\n");
+                    default -> System.out.println("Unknown action\n");
                 }
-            } while (line.charAt(0) != '5' || line.length() != 1);
-        } catch (StringIndexOutOfBoundsException ex) {
-            System.out.println("Empty input received. Exiting program...");
+            } else {
+                System.out.println("Invalid input. Please select a number from 1 to 5\n");
+            }
         }
     }
-
     private static void findAndReserveRoom() {
         final Scanner scanner = new Scanner(System.in);
 
@@ -134,13 +127,13 @@ public class MainMenu {
                     }
                 }
 
-                printMainMenu();
+                adminMenuOptions();
             } else {
                 System.out.println("Please, create an account.");
-                printMainMenu();
+                adminMenuOptions();
             }
         } else if ("n".equals(bookRoom)){
-            printMainMenu();
+            adminMenuOptions();
         } else {
             reserveRoom(scanner, checkInDate, checkOutDate, rooms);
         }
@@ -187,23 +180,11 @@ public class MainMenu {
             hotelResource.createCustomer(email, firstName, lastName);
             System.out.println("Account created successfully!");
 
-            printMainMenu();
+            adminMenuOptions();
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getLocalizedMessage());
             createAccount();
         }
     }
 
-    public static void printMainMenu()
-    {
-        System.out.print("\nWelcome to the Hotel Reservation Application\n" +
-                "--------------------------------------------\n" +
-                "1. Find and reserve a room\n" +
-                "2. See my reservations\n" +
-                "3. Create an Account\n" +
-                "4. Admin\n" +
-                "5. Exit\n" +
-                "--------------------------------------------\n" +
-                "Please select a number for the menu option:\n");
-    }
 }

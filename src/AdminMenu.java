@@ -40,7 +40,7 @@ public class AdminMenu {
                             addRoom();
                             break;
                         case '5':
-                            MainMenu.printMainMenu();
+                            MainMenu.adminMenuOptions();
                             break;
                         default:
                             System.out.println("Unknown action\n");
