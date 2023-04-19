@@ -110,7 +110,7 @@ public class AdminMenu {
         try {
             return RoomType.valueOfLabel(Integer.parseInt(scanner.nextLine()));
         } catch (IllegalArgumentException exp) {
-            System.out.println("Invalid room type! Please, choose 1 for single bed or 2 for double bed:");
+            System.out.println("Please select a valid room type, Enter 1 for a single bed or 2 for a double bed:");
             return enterRoomType(scanner);
         }
     }

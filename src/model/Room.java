@@ -37,7 +37,7 @@ public class Room implements IRoom{
         if(isFirstRecord) {
             sb.append(divider);
             sb.append(String.format("\n" + format, "Room Number", "Room Type", "Price"));
-            sb.append("\n" + divider);
+            sb.append("\n").append(divider);
             isFirstRecord = false;
         }
         sb.append(String.format("\n" + format, roomNumber, roomType, "€" + price));
@@ -50,10 +50,9 @@ public class Room implements IRoom{
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof Room)) {
+        if (!(obj instanceof Room otherRoom)) {
             return false;
         }
-        Room otherRoom = (Room) obj;
         return this.roomNumber.equals(otherRoom.roomNumber);
     }
 
