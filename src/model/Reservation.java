@@ -1,12 +1,13 @@
 package model;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reservation {
-    private final Customer customer;
-    private final IRoom room;
-    private final Date checkInDate;
-    private final Date checkOutDate;
+    private Customer customer;
+    private IRoom room;
+    private Date checkInDate;
+    private Date checkOutDate;
 
     public Reservation(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
         this.customer = customer;
@@ -18,16 +19,30 @@ public class Reservation {
     public Customer getCustomer() {
         return customer;
     }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
     public IRoom getRoom() {
         return room;
     }
-    public Date getCheckInDate(){
+    public void setRoom(IRoom room) {
+        this.room = room;
+    }
+    public Date getCheckInDate() {
         return checkInDate;
     }
-    public Date getCheckOutDate(){
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+    public Date getCheckOutDate() {
         return checkOutDate;
     }
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
     private static boolean isFirstRecord = true;
+
     @Override
     public String toString() {
         String customerName = customer.getFirstName() + " " + customer.getLastName();
@@ -48,5 +63,4 @@ public class Reservation {
 
         return sb.toString();
     }
-
 }
