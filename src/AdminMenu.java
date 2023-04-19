@@ -93,7 +93,7 @@ public class AdminMenu {
         try {
             return Double.parseDouble(scanner.nextLine());
         } catch (NumberFormatException exp) {
-            System.out.println("Please enter a valid number for the room price!");
+            System.out.println("Please enter a valid price for the room!");
             return enterRoomPrice(scanner);
         }
     }

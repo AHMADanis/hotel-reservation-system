@@ -6,7 +6,6 @@ public interface IRoom {
     default Double getRoomPrice() {
         return null;
     }
-
     RoomType getRoomType();
     boolean isFree();
 }

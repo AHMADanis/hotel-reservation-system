@@ -14,19 +14,35 @@ public class Room implements IRoom{
     }
     @Override
     public String getRoomNumber() {
-        return this.roomNumber;
+        return roomNumber;
     }
     @Override
     public Double getRoomPrice() {
-        return this.price;
+        return price;
     }
     @Override
     public RoomType getRoomType() {
-        return this.roomType;
+        return roomType;
     }
     @Override
     public boolean isFree() {
-        return this.price != null && this.price.equals(0.0);
+        return price != null && price.equals(0.0);
+    }
+    // updated override
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Room otherRoom)) {
+            return false;
+        }
+        return Objects.equals(roomNumber, otherRoom.roomNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomNumber);
     }
     private static boolean isFirstRecord = true;
     @Override
@@ -42,22 +58,5 @@ public class Room implements IRoom{
         }
         sb.append(String.format("\n" + format, roomNumber, roomType, "€" + price));
         return sb.toString();
-    }
-
-    // updated override
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (!(obj instanceof Room otherRoom)) {
-            return false;
-        }
-        return this.roomNumber.equals(otherRoom.roomNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(roomNumber);
     }
 }
