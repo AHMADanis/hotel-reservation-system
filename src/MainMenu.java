@@ -24,7 +24,7 @@ public class MainMenu {
             menu.append(String.format("%d. %s\n", i+1, options[i]));
         }
         menu.append("--------------------------------------------\n");
-        menu.append("Please select your desired menu option:\n");
+        menu.append("Please choose an option from the menu.\n");
         System.out.print(menu);
     }
     public static void mainMenu() {
@@ -48,7 +48,7 @@ public class MainMenu {
                     default -> System.out.println("Unknown action\n");
                 }
             } else {
-                System.out.println("Invalid input. Please select 1 to 5\n");
+                System.out.println("Please choose a number between 1 and 5\n");
             }
         }
     }
@@ -64,11 +64,11 @@ public class MainMenu {
                 Collection<IRoom> alternativeRooms = hotelResource.findAlternativeRooms(checkIn, checkOut);
 
                 if (alternativeRooms.isEmpty()) {
-                    System.out.println("No rooms found.");
+                    System.out.println("Error: Room not available.");
                 } else {
                     Date alternativeCheckIn = hotelResource.addDaysToDate(checkIn);
                     Date alternativeCheckOut = hotelResource.addDaysToDate(checkOut);
-                    System.out.println("We've only found rooms on alternative dates:");
+                    System.out.println("Unfortunately, these rooms are only available on different dates.");
                     printReservationDate("Check-In", alternativeCheckIn);
                     printReservationDate("Check-Out", alternativeCheckOut);
                     printRooms(alternativeRooms);
@@ -103,46 +103,47 @@ public class MainMenu {
     }
 
     private static void reserveRoom(final Scanner scanner, final Date checkInDate, final Date checkOutDate, final Collection<IRoom> rooms) {
-        String prompt = "Would you like to book? y/n";
+        String prompt = "Do you want to make a reservation? (y/n)";
         if (promptUser(prompt, scanner)) {
-            prompt = "Do you have an account with us? y/n";
-            if (promptUser(prompt, scanner)) {
-                prompt = "Enter Email format: name@domain.com";
-                String customerEmail = getStringInput(prompt, scanner);
-                Customer customer = hotelResource.getCustomer(customerEmail);
-                if (customer == null) {
-                    System.out.println("Customer not found. Please create a new account.");
-                    mainMenuOptions();
-                } else {
-                    prompt = "What room number would you like to reserve?";
-                    String roomNumber = getStringInput(prompt, scanner);
-                    IRoom room = hotelResource.getRoom(roomNumber);
-                    if (rooms.contains(room)) {
-                        Reservation reservation = hotelResource.bookRoom(customerEmail, room, checkInDate, checkOutDate);
-                        System.out.println("Reservation created successfully! \n" + reservation);
-                    } else {
-                        System.out.println("Error: room number not available. Please start reservation again.");
-                        mainMenuOptions();
-                    }
-                }
-            } else {
-                System.out.println("Please create an account.");
-                mainMenuOptions();
-            }
-        } else {
             mainMenuOptions();
+            return;
         }
+        prompt = "Have you registered with us previously? (y/n)";
+        if (promptUser(prompt, scanner)) {
+            System.out.println("You need to create an account to proceed.");
+            mainMenuOptions();
+            return;
+        }
+        prompt = "Enter your email (format: name@domain.com).";
+        String customerEmail = getStringInput(prompt, scanner);
+        Customer customer = hotelResource.getCustomer(customerEmail);
+        if (customer == null) {
+            System.out.println("Account not found for the entered email. Please create a new account.");
+            createAccount();
+            return;
+        }
+        prompt = "Please specify the room number for the reservation.";
+        String roomNumber = getStringInput(prompt, scanner);
+        IRoom room = hotelResource.getRoom(roomNumber);
+        if (!rooms.contains(room)) {
+            System.out.println("Room unavailable. Please try again.");
+            mainMenuOptions();
+            return;
+        }
+        Reservation reservation = hotelResource.bookRoom(customerEmail, room, checkInDate, checkOutDate);
+        System.out.println("The reservation has been successfully created! \n" + reservation);
     }
+
 
     private static boolean promptUser(String prompt, Scanner scanner) {
         System.out.println(prompt);
         String userInput = scanner.nextLine();
         while (!userInput.matches("[yn]")) {
-            System.out.println("Invalid input. Please enter 'y' or 'n'.");
+            System.out.println("System only accept 'y' or 'n' as input. Please try again.");
             System.out.println(prompt);
             userInput = scanner.nextLine();
         }
-        return userInput.equals("y");
+        return !userInput.equals("y");
     }
 
     private static String getStringInput(String prompt, Scanner scanner) {
@@ -174,7 +175,7 @@ public class MainMenu {
                     .collect(Collectors.joining());
 
             System.out.println(reservations.isEmpty() ?
-                    "Empty email: or we could not find your email in our system" : output);
+                    "Empty email" : output);
         } catch (Exception e) {
             System.out.println("There are no reservation against your email");
         }
