@@ -24,14 +24,13 @@ public class MainMenu {
             menu.append(String.format("%d. %s\n", i+1, options[i]));
         }
         menu.append("--------------------------------------------\n");
-        menu.append("Please enter your desired menu option:\n");
+        menu.append("Please select your desired menu option:\n");
         System.out.print(menu);
     }
     public static void mainMenu() {
         Scanner scanner = new Scanner(System.in);
         String[] options = {"1", "2", "3", "4", "5"};
         boolean exit = false;
-
         while (!exit) {
             mainMenuOptions();
             String input = scanner.nextLine().trim();
@@ -84,7 +83,7 @@ public class MainMenu {
 
     private static Date getReservationDate(String dateType) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter " + dateType + " Date mm/dd/yyyy example 02/01/2020");
+        System.out.println("Enter " + dateType + " Date mm/dd/yyyy");
         return getInputDate(scanner);
     }
 
