@@ -163,7 +163,7 @@ public class MainMenu {
     private static void seeMyReservation() {
         final Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter your Email (format: name@domain.com).");
+        System.out.println("Enter your Email (format: name@domain.com)");
         final String customerEmail = scanner.nextLine();
 
         displayReservations(hotelResource.getCustomersReservations(customerEmail));
