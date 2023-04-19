@@ -8,13 +8,6 @@ import java.util.*;
 
 public class AdminMenu {
     private static final AdminResource adminResource = AdminResource.getInstance();
-    private static void predefinedRooms() {
-        List<IRoom> rooms = new ArrayList<>();
-        rooms.add(new Room("101", 100.0, RoomType.SINGLE));
-        rooms.add(new Room("102", 120.0, RoomType.DOUBLE));
-        rooms.add(new Room("103", 150.0, RoomType.DOUBLE));
-        adminResource.addRoom(rooms);
-    }
     private static void adminScreenOptions() {
         String[] menuOptions = {
                 "See all Customers",
@@ -33,7 +26,6 @@ public class AdminMenu {
     }
     public static void adminMenuOptions() {
         Scanner scanner = new Scanner(System.in);
-        predefinedRooms();
         adminScreenOptions();
         while (true) {
             String line = scanner.nextLine().trim();
@@ -81,19 +73,19 @@ public class AdminMenu {
     private static void addRoom() {
         final Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter room number:");
+        System.out.println("Please provide the room number:");
         final String roomNumber = scanner.nextLine();
 
-        System.out.println("Enter price per night:");
+        System.out.println("Please provide the per night price:");
         final double roomPrice = enterRoomPrice(scanner);
 
-        System.out.println("Enter room type: 1 for single bed, 2 for double bed:");
+        System.out.println("Please select the room size: 1 -> SINGLE, 2 -> DOUBLE:");
         final RoomType roomType = enterRoomType(scanner);
 
         final Room room = new Room(roomNumber, roomPrice, roomType);
 
         adminResource.addRoom(Collections.singletonList(room));
-        System.out.println("Room added successfully!");
+        System.out.println("The room has been added successfully!");
         addAnotherRoom();
     }
 
@@ -101,7 +93,7 @@ public class AdminMenu {
         try {
             return Double.parseDouble(scanner.nextLine());
         } catch (NumberFormatException exp) {
-            System.out.println("Invalid room price! Please, enter a valid double number");
+            System.out.println("Please enter a valid number for the room price!");
             return enterRoomPrice(scanner);
         }
     }
@@ -110,7 +102,7 @@ public class AdminMenu {
         try {
             return RoomType.valueOfLabel(Integer.parseInt(scanner.nextLine()));
         } catch (IllegalArgumentException exp) {
-            System.out.println("Please select a valid room type, Enter 1 for a single bed or 2 for a double bed:");
+            System.out.println("Select a valid option:  1 -> [ single bed ] or 2 -> [ double bed ]");
             return enterRoomType(scanner);
         }
     }

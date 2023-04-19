@@ -1,9 +1,12 @@
 package api;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import model.Customer;
 import model.IRoom;
+import model.Room;
+import model.RoomType;
 import service.CustomerService;
 import service.ReservationService;
 
@@ -14,6 +17,11 @@ public class AdminResource {
     private AdminResource() {
         customerService = CustomerService.getInstance();
         reservationService = ReservationService.getInstance();
+        List<IRoom> rooms = new ArrayList<>();
+        rooms.add(new Room("101", 100.0, RoomType.SINGLE));
+        rooms.add(new Room("102", 120.0, RoomType.DOUBLE));
+        rooms.add(new Room("103", 150.0, RoomType.DOUBLE));
+        addRoom(rooms);
     }
     public static AdminResource getInstance() {
         return INSTANCE;
