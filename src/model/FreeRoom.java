@@ -2,8 +2,8 @@ package model;
 
 public class FreeRoom extends Room {
     private boolean isFree;
-    public FreeRoom(String roomNumber, RoomType roomType) {
-        super(roomNumber, 0.0, roomType); // Set the price to 0
+    public FreeRoom(String roomNumber, RoomType enumeration) {
+        super(roomNumber, 0.0, enumeration);
     }
     public boolean isFree() {
         return isFree;
@@ -13,7 +13,6 @@ public class FreeRoom extends Room {
     }
     @Override
     public String toString(){
-        //return "FreeRoom " + getRoomNumber() + ", " + getRoomType() + ", " + "Price: " + getRoomPrice();
-        return "Free Room: " + super.toString();
+        return "Free Room: \n" + super.toString();
     }
 }

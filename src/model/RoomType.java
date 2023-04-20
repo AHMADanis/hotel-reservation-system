@@ -1,20 +1,30 @@
 package model;
+/**
+ * An enumeration of room types for a hotel reservation system.
+ * Each room type is assigned a unique label (or ID) to identify it.
+ */
 public enum RoomType {
     SINGLE(1),
     DOUBLE(2);
+    public final int id;
 
-    public final int label;
-
-    private RoomType(int label) {
-        this.label = label;
+    RoomType(int id) {
+        this.id = id;
     }
 
-    public static RoomType valueOfLabel(int label) {
+    /**
+     * Returns the RoomType object that corresponds to the given id.
+     * @param id the id to look up
+     * @return the corresponding RoomType object
+     * @throws IllegalArgumentException if no RoomType with the given id exists
+     */
+
+    public static RoomType valueOfLabel(int id) {
         for (RoomType roomType : values()) {
-            if (roomType.label == label) {
+            if (roomType.id == id) {
                 return roomType;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Invalid RoomType id:" + id);
     }
 }

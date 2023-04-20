@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Room implements IRoom{
     private final String roomNumber;
     private final Double price;
-    private final RoomType roomType;
+    private final RoomType enumeration;
 
-    public Room(String roomNumber, Double price, RoomType roomType) {
+    public Room(String roomNumber, Double price, RoomType enumeration) {
         this.roomNumber = roomNumber;
         this.price = price;
-        this.roomType = roomType;
+        this.enumeration = enumeration;
     }
     @Override
     public String getRoomNumber() {
@@ -22,13 +22,12 @@ public class Room implements IRoom{
     }
     @Override
     public RoomType getRoomType() {
-        return roomType;
+        return enumeration;
     }
     @Override
     public boolean isFree() {
         return price != null && price.equals(0.0);
     }
-    // updated override
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -55,8 +54,10 @@ public class Room implements IRoom{
             sb.append(String.format("\n" + format, "Room Number", "Room Type", "Price"));
             sb.append("\n").append(divider);
             isFirstRecord = false;
+        } else {
+            sb.append(divider);
         }
-        sb.append(String.format("\n" + format, roomNumber, roomType, "€" + price));
+        sb.append(String.format("\n" + format, roomNumber, enumeration, "€" + price));
         return sb.toString();
     }
 }

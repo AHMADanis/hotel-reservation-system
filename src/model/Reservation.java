@@ -42,7 +42,6 @@ public class Reservation {
     }
 
     private static boolean isFirstRecord = true;
-
     @Override
     public String toString() {
         String customerName = customer.getFirstName() + " " + customer.getLastName();
