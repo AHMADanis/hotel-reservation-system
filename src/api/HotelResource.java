@@ -32,20 +32,13 @@ public class HotelResource {
 
     public Reservation bookRoom(String customerEmail, IRoom room, Date checkInDate, Date checkOutDate) {
         Customer customer = getCustomer(customerEmail);
-        if(customer == null){
-            throw new IllegalArgumentException("Invalid customer email");
-        }
+        if (customer == null) throw new IllegalArgumentException("Invalid customer email");
         return reservationService.reserveARoom(customer, room, checkInDate, checkOutDate);
     }
 
     public Collection<Reservation> getCustomersReservations(String customerEmail) {
-        final Customer customer = getCustomer(customerEmail);
-
-        if (customer == null) {
-            return Collections.emptyList();
-        }
-
-        return reservationService.getCustomerReservations(getCustomer(customerEmail));
+        Customer customer = getCustomer(customerEmail);
+        return customer == null ? Collections.emptyList() : reservationService.getCustomerReservations(customer);
     }
 
     public Collection<IRoom> findAvailableRooms(final Date checkIn, final Date checkOut) {
@@ -53,7 +46,7 @@ public class HotelResource {
     }
 
     public Collection<IRoom> findAlternativeRooms(final Date checkIn, final Date checkOut) {
-        return reservationService.findAlternativeRooms(checkIn, checkOut);
+        return reservationService.findAltRooms(checkIn, checkOut);
     }
 
     public Date addDaysToDate(final Date date) {

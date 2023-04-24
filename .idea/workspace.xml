@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f1238cd-be75-443d-b343-448164d5dd07" name="Changes" comment="fixed bugs and update classes">
+    <list default="true" id="2f1238cd-be75-443d-b343-448164d5dd07" name="Changes" comment="cleaned up the code for submission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/HotelResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,6 +238,7 @@
     <MESSAGE value="updated admin manu" />
     <MESSAGE value="commit" />
     <MESSAGE value="fixed bugs and update classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs and update classes" />
+    <MESSAGE value="cleaned up the code for submission" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up the code for submission" />
   </component>
 </project>
